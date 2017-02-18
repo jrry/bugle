@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="pl"
+      lang="pl">
+
+    <h:head>
+        <f:facet name="first">
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <ui:insert name="seo"/>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&amp;subset=latin,latin-ext"/>
+            <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+            <ui:insert name="head_css"/>
+            <h:outputScript library="primefaces" name="jquery/jquery.js"/>
+        </f:facet>
+        <link rel="stylesheet" href="/javax.faces.resource/css/style.css"/>
+        <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
+        <script type="text/javascript" src="/javax.faces.resource/js/scripts.js"/>
+        <link rel="icon" type="image/png" href="/javax.faces.resource/icon/favicon.png"/>
+        <link rel="canonical" href="http://bugle.pl#{request.getAttribute('javax.servlet.forward.request_uri')}"/>
+        <ui:insert name="head_js"/>
+    </h:head>
+    
+    <ui:insert name="setting"/>
+
+    <h:body>
+        <ui:fragment rendered="#{empty request.remoteUser}">
+            <nav class="navbar navbar-inverse navbar-fixed-top navbar-no-bg">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button id="menu" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <ui:insert name="logo"/>
+                    </div>
+                    <div class="collapse navbar-collapse" id="top-navbar-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <h:link value="Strona główna" outcome="pretty:home"/>
+                            </li>
+                            <li>
+                                <h:link value="Logowanie" outcome="pretty:login"/>
+                            </li>
+                            <li>
+                                <h:link value="Rejestracja" outcome="pretty:register"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </ui:fragment>
+        <ui:fragment rendered="#{not empty request.remoteUser}">
+            <h:form id="logoff">
+                <nav class="navbar navbar-inverse navbar-fixed-top navbar-no-bg" role="navigation">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button id="menu" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <h:link class="navbar-brand" outcome="pretty:home"/>
+                        </div>
+                        <div class="collapse navbar-collapse" id="top-navbar-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <h:link value="Strona główna" outcome="pretty:home"/>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profil <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <ui:fragment rendered="#{request.isUserInRole('admin')}"><li><h:link value="Administrator" outcome="pretty:dashboard"/></li></ui:fragment>
+                                        <li>
+                                            <h:link value="Utwórz artykuł" outcome="pretty:create"/>
+                                        </li>
+                                        <li>
+                                            <h:link value="Ustawienia" outcome="pretty:profile"/>
+                                        </li>
+                                        <li role="separator" class="divider"></li>
+                                        <li>
+                                            <h:commandLink action="#{login.logoutTry()}" value="Wyloguj"/>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </h:form>
+        </ui:fragment>
+
+        <ui:insert name="content"/>
+
+    </h:body>
+
+</html>

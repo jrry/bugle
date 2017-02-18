@@ -1,0 +1,68 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+    <url-mapping id="home">
+        <pattern value="/"/>
+        <view-id value="/home.xhtml"/>
+    </url-mapping>
+    <url-mapping id="login">
+        <pattern value="/profil/logowanie/"/>
+        <view-id value="/login.xhtml"/>
+    </url-mapping>
+    <url-mapping id="register">
+        <pattern value="/profil/rejestracja/"/>
+        <view-id value="/registration.xhtml"/>
+    </url-mapping>
+    <url-mapping id="profile">
+        <pattern value="/profil/ustawienia/"/>
+        <view-id value="/profile.xhtml"/>
+    </url-mapping>
+    <url-mapping id="create">
+        <pattern value="/profil/utworz-wpis/"/>
+        <view-id value="/edit.xhtml"/>
+    </url-mapping>
+    <url-mapping id="dashboard">
+        <pattern value="/webadmin/"/>
+        <view-id value="/webadmin/dashboard.xhtml"/>
+    </url-mapping>
+    <url-mapping id="users">
+        <pattern value="/webadmin/uzytkownicy/"/>
+        <view-id value="/webadmin/users.xhtml"/>
+    </url-mapping>
+    <url-mapping id="categories">
+        <pattern value="/webadmin/kategorie/"/>
+        <view-id value="/webadmin/categories.xhtml"/>
+    </url-mapping>
+    <url-mapping id="entries">
+        <pattern value="/webadmin/wpisy/"/>
+        <view-id value="/webadmin/entries.xhtml"/>
+    </url-mapping>
+    <url-mapping id="page">
+        <pattern value="/strona/#{page}/" />
+        <view-id value="/" />
+    </url-mapping>
+    <url-mapping id="category">
+        <pattern value="/kategoria/#{ct}/" />
+        <view-id value="/" />
+    </url-mapping>
+    <url-mapping id="category-page">
+        <pattern value="/kategoria/#{ct}/strona/#{page}/" />
+        <view-id value="/" />
+    </url-mapping>
+    <url-mapping id="single">
+        <pattern value="/#{postId}/" />
+        <view-id value="/post.xhtml" />
+    </url-mapping>
+
+    <rewrite match="/home.xhtml" substitute="/" redirect="301" />
+    <rewrite match="/index.html" substitute="/" redirect="301" />
+    <rewrite match="/index.php" substitute="/" redirect="301" />
+    <rewrite match="/login.xhtml" substitute="/profil/logowanie/" redirect="301" />
+    <rewrite match="/registration.xhtml" substitute="/profil/rejestracja/" redirect="301" />
+    <rewrite match="/profile.xhtml" substitute="/profil/ustawienia/" redirect="301" />
+    <rewrite match="/edit.xhtml" substitute="/profil/utworz-wpis/" redirect="301" />
+    <rewrite match="/webadmin/dashboard.xhtml" substitute="/webadmin/" redirect="301" />
+
+</pretty-config>

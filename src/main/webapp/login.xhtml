@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:z="http://xmlns.jcp.org/jsf/composite/ezcomp"
+                template="/WEB-INF/templates/main.xhtml">
+
+    <ui:define name="seo">
+        <z:seometa title="Logowanie" description="Zaloguj się na blogu Bugle podając poprawny login oraz hasło"/>
+    </ui:define>
+    
+    <ui:define name="setting">
+        <f:metadata>
+            <f:viewAction action="#{login.checkAccess()}"/>
+        </f:metadata>
+    </ui:define>
+    
+    <ui:define name="logo"><h:link class="navbar-brand" outcome="pretty:home" value="bugle"/></ui:define>
+
+    <ui:define name="content">
+        <div class="top-content">
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7 text">
+                            <h1><strong>Logowanie</strong></h1>
+                            <div class="description">
+                                <p>Zaloguj się korzystając z formluarza umieszczonego na stronie.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 form-box">
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <h3>Zaloguj się</h3>
+                                    <p>Podaj nazwę użytkownika oraz hasło:</p>
+                                </div>
+                                <div class="form-top-right">
+                                    <i class="fa fa-key"></i>
+                                </div>
+                            </div>
+                            <div class="form-bottom">
+                                <p:messages id="messages" globalOnly="true" showIcon="false" autoUpdate="true" closable="true" />
+                                <h:form id="logon">
+                                    <div class="form-group">
+                                        <p:inputText id="username" placeholder="Nazwa Użytkownika..." value="#{login.username}">
+                                            <p:clientValidator event="blur"/>
+                                        </p:inputText>
+                                        <p:message for="username" display="text"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <p:password id="password" placeholder="Hasło..." value="#{login.password}">
+                                            <p:clientValidator event="blur"/>
+                                        </p:password>
+                                        <p:message for="password" display="text"/>
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <p:selectBooleanCheckbox id="remember-me" value="#{login.rememberMe}" itemLabel="Zapamiętaj"/>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p:commandButton id="login" value="Zaloguj" class="btn btn-primary" action="#{login.loginTry}" ajax="false"/>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

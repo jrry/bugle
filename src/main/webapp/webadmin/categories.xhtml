@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/panel.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        <title>Kategorie</title>
+    </ui:define>
+
+    <ui:define name="content">
+        <h1 class="page-header">Kategorie</h1>
+        <h:form id="form-table">
+            <p:dataTable id="table" widgetVar="dtable" value="#{categoryEdit.lazyCategories}" paginator="true" paginatorPosition="bottom" 
+                         reflow="true" rows="10" lazy="true" sortMode="single" var="category" emptyMessage="Brak kategorii" 
+                         selection="#{categoryEdit.selectedCategory}" selectionMode="single" currentPageReportTemplate="{currentPage}/{totalPages}"
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
+                <p:ajax event="rowDblselect" oncomplete="PF('editDialog').show()" update=":form-dialog"/>
+                <p:column headerText="Id:" sortBy="#{category.category_id}" class="text-center" style="width: 16%">
+                    <h:outputText value="#{category.category_id}"/>
+                </p:column>
+                <p:column headerText="Kategoria:" sortBy="#{category.category_name}" class="text-center">
+                    <h:outputText value="#{category.category_name}"/>
+                </p:column>
+                <p:column headerText="Seo:" sortBy="#{category.category_seoname}" class="text-center">
+                    <h:outputText value="#{category.category_seoname}"/>
+                </p:column>
+                <p:column headerText="Wpisy:" sortBy="#{category.category_entries_count}" class="text-center">
+                    <h:outputText value="#{category.category_entries_count}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton class="btn btn-primary" value="Dodaj" icon="fa fa-plus" oncomplete="PF('editDialog').show()">
+                        <p:ajax update=":form-dialog" resetValues="true"/>
+                    </p:commandButton>
+                    <p:commandButton class="btn btn-primary" value="Edytuj" icon="fa fa-pencil" oncomplete="PF('editDialog').show()" update=":form-dialog"/>
+                    <p:commandButton class="btn btn-danger" value="Usuń" icon="fa fa-trash-o"  actionListener="#{categoryEdit.delete()}" update="@form"/>
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+        <p:dialog header="Edycja kategorii" width="400" widgetVar="editDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            <h:form id="form-dialog">
+                <h:inputHidden value="#{categoryEdit.selectedCategory.category_id}"/>
+                <div class="form-group">
+                    <p:inputText id="name" placeholder="Nazwa kategorii..." value="#{categoryEdit.selectedCategory.category_name}"/>
+                </div>
+                <div class="form-group">
+                    <p:inputText id="seoname" placeholder="Nazwa seo..." value="#{categoryEdit.selectedCategory.category_seoname}"/>
+                </div>
+                <div class="text-center">
+                    <span class="btn-group">
+                        <p:commandButton id="save-button" class="btn btn-primary" value="Zapisz" icon="fa fa-save" actionListener="#{categoryEdit.save()}" 
+                                         update=":form-table:table" process="@form" oncomplete="PF('editDialog').hide();"/>
+                        <p:defaultCommand target="save-button" />
+                    </span>
+                </div>
+            </h:form>
+        </p:dialog>
+    </ui:define>
+
+</ui:composition>

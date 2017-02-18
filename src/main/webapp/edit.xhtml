@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:z="http://xmlns.jcp.org/jsf/composite/ezcomp"
+                template="/WEB-INF/templates/main.xhtml">
+
+    <ui:define name="seo">
+        <z:seometa title="Utwórz wpis - #{optionsEdit.domain_name}" description="Utwórz wpis i zamieść go na stronie głównej"/>
+    </ui:define>
+    
+    <ui:define name="head_css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css"/>
+    </ui:define>
+
+    <ui:define name="head_js">
+        <script>var CKEDITOR_BASEPATH = '/javax.faces.resource/ckeditor/';</script>
+        <script src="#{resource['ckeditor:ckeditor.js']}"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.js"/>
+    </ui:define>
+
+    <ui:define name="logo"><h:link class="navbar-brand" outcome="pretty:home"/></ui:define>
+
+    <ui:define name="content">
+        <div class="top-content">
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <h3>Utwórz wpis</h3>
+                                    <p>Uzupełnij tytuł, treść artykułu oraz dołącz zdjęcia:</p>
+                                </div>
+                                <div class="form-top-right">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </div>
+                            </div>
+                            <div class="form-bottom">
+                                <p:messages id="messages" globalOnly="true" showIcon="false" autoUpdate="true" closable="true" />
+                                <h:form id="form" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <p:inputText id="form-title" placeholder="Tytuł..." value="#{postEdit.title}">
+                                            <p:clientValidator event="blur"/>
+                                        </p:inputText>
+                                        <p:message for="form-title" display="text"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <p:inputText id="form-seotitle" placeholder="Adres SEO (/przykladowa-strona/)" value="#{postEdit.seotitle}">
+                                            <p:clientValidator event="blur"/>
+                                        </p:inputText>
+                                        <p:message for="form-seotitle" display="text"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <p:inputTextarea id="form-seodesc" placeholder="Opis strony (meta description)" value="#{postEdit.seodesc}" counter="charlimit" maxlength="155" rows="2" counterTemplate="{0} znaków do wykorzystania.">
+                                            <p:clientValidator event="blur"/>
+                                        </p:inputTextarea>
+                                        <p:message for="form-seodesc" display="text"/>
+                                        <h:outputText id="charlimit"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <p:selectManyMenu id="form-category" converter="omnifaces.SelectItemsConverter" value="#{postEdit.categories}" var="category" filter="true" filterMatchMode="contains" showCheckbox="true" required="true" requiredMessage="Nie wybrano żadnej kategorii">
+                                            <f:selectItems value="#{categoryView.allCategories}" var="category" itemLabel="#{category.category_name}" itemValue="#{category}" />
+                                            <p:column>
+                                                <h:outputText value="#{category.category_name}" />
+                                            </p:column>
+                                        </p:selectManyMenu>
+                                        <p:watermark for="form-category" value="Szukaj kategorii..."/>
+                                        <p:message for="form-category" display="text"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <p:commandButton type="button" update="upload" value="Przeglądaj" class="btn btn-primary" onclick="document.getElementById('form:upload').click()">
+                                                    <p:ajax update="up-mess" resetValues="true" />
+                                                </p:commandButton>
+                                                <p:fileUpload id="upload" class="hidden" label="Upload" mode="simple" validator="uploadValidator" value="#{postEdit.file}" accept="image/*"/>
+                                                <h:inputHidden id="coords" value="#{postEdit.coords}"/>                                       
+                                            </span>
+                                            <p:inputText id="form-alt" placeholder="Alt..." value="#{postEdit.alt}">
+                                                <p:clientValidator event="blur"/>
+                                            </p:inputText>
+                                        </div>
+                                        <p:message id="up-mess" for="upload" display="text"/>
+                                        <p:message for="form-alt" display="text"/>
+                                    </div>
+                                    <div id="images" class="form-group"/>
+                                    <div class="form-group">
+                                        <h:inputTextarea id="editor1"/>
+                                        <script type="text/javascript">
+                                            CKEDITOR.replace('form:editor1');
+                                        </script> 
+                                        <h:inputHidden id="editorContent" value="#{postEdit.content}"/>
+                                        <p:message for="editorContent" display="text"/>
+                                    </div>
+                                    <p:commandButton value="Zapisz" ajax="false" class="btn btn-primary" onclick="document.getElementById('form:editorContent').value = CKEDITOR.instances['form:editor1'].getData();" action="#{postEdit.save()}" />
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

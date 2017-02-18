@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/panel.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        <title>Użytkownicy</title>
+    </ui:define>
+
+    <ui:define name="content">
+        <h1 class="page-header">Użytkownicy</h1>
+        <h:form id="form-table">
+            <p:dataTable id="table" widgetVar="dtable" value="#{userEdit.lazyUsers}" paginator="true" paginatorPosition="bottom" 
+                         reflow="true" rows="10" lazy="true" sortMode="single" var="user" emptyMessage="Brak użytkowników"
+                         selection="#{userEdit.selectedUser}" selectionMode="single" currentPageReportTemplate="{currentPage}/{totalPages}" 
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
+                <p:ajax event="rowDblselect" oncomplete="PF('editDialog').show()" update=":form-dialog"/>
+                <p:column headerText="Id:" sortBy="#{user.user_id}" class="text-center" style="width: 16%">
+                    <h:outputText value="#{user.user_id}"/>
+                </p:column>
+                <p:column headerText="Username:" sortBy="#{user.user_name}" class="text-center">
+                    <h:outputText value="#{user.user_name}"/>
+                </p:column>
+                <p:column headerText="Email:" sortBy="#{user.user_email}" class="text-center">
+                    <h:outputText value="#{user.user_email}"/>
+                </p:column>
+                <p:column headerText="Rola:" sortBy="#{user.user_role}" class="text-center">
+                    <h:outputText value="#{user.user_role}"/>
+                </p:column>
+                <p:column headerText="Wpisy:" sortBy="#{user.user_entries_count}" class="text-center">
+                    <h:outputText value="#{user.user_entries_count}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton class="btn btn-primary" value="Edytuj" icon="fa fa-pencil" oncomplete="PF('editDialog').show()" update=":form-dialog"/>
+                    <p:commandButton class="btn btn-danger" value="Usuń" icon="fa fa-trash-o"  actionListener="#{userEdit.delete()}" update="table"/>
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+        <p:dialog header="Edycja konta użytkownika" width="400" widgetVar="editDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            <h:form id="form-dialog">
+                <h:inputHidden value="#{userEdit.selectedUser.user_id}"/>
+                <div class="form-group">
+                    <p:inputText id="name" placeholder="Nazwa użytkownika..." value="#{userEdit.selectedUser.user_name}"/>
+                </div>
+                <div class="form-group">
+                    <p:inputText id="seoname" placeholder="Email..." value="#{userEdit.selectedUser.user_email}"/>
+                </div>
+                <div class="form-group">
+                    <p:selectOneMenu value="#{userEdit.selectedUser.user_role}">
+                        <f:selectItem itemLabel="Admin" itemValue="admin" />
+                        <f:selectItem itemLabel="User" itemValue="user" />
+                    </p:selectOneMenu>
+                </div>
+                <div class="form-group">
+                    <p:inplace id="change-password" label="Zmień hasło">
+                        <p:password id="password" placeholder="Nowe hasło..." value="#{userEdit.password}"/>
+                    </p:inplace>
+                </div>
+                <div class="text-center">
+                    <span class="btn-group">
+                        <p:commandButton id="save-button" class="btn btn-primary" value="Zapisz" icon="fa fa-save" actionListener="#{userEdit.save()}" 
+                                         update=":form-table:table" process="@form" oncomplete="PF('editDialog').hide();"/>
+                        <p:defaultCommand target="save-button" />
+                    </span>
+                </div>
+            </h:form>
+        </p:dialog>
+    </ui:define>
+
+</ui:composition>

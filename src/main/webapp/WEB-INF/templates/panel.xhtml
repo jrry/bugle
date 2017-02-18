@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="pl"
+      lang="pl">
+
+    <h:head>
+        <f:facet name="first">
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <ui:insert name="title"/>
+        </f:facet>
+        <h:outputScript library="primefaces" name="jquery/jquery.js" />
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
+        <link rel="icon" type="image/png" href="#{resource['icon:favicon.png']}"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&amp;subset=latin,latin-ext"/>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="#{resource['css:webadmin.css']}"/>
+    </h:head>
+
+    <h:body>
+         <!--<div id="wrapper">-->
+            <!-- Navigation -->
+            <h:form id="logoff">
+                <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <h:link class="navbar-brand" value="Admin" outcome="pretty:dashboard"/>
+                        </div>
+                        <ul class="nav navbar-right">
+                            <li>
+                                <h:link value="Strona główna" outcome="pretty:home"/>
+                            </li>
+                            <!--<li>-->
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profil <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Artykuły</a></li>
+                                        <li>
+                                            <h:link value="Ustawienia" outcome="pretty:profile"/>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <h:commandLink action="#{login.logoutTry()}" value="Wyloguj"/>
+                                        </li>
+                                    </ul>
+                                </li>
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <div class="navbar-inverse sidebar" role="navigation">
+                        <div class="sidebar-nav collapse navbar-collapse">
+                            <ul class="nav" id="side-menu">
+                                <li>
+                                    <h:link outcome="pretty:dashboard">
+                                        <i class="fa fa-dashboard fa-fw"/>
+                                        <span>Panel</span>
+                                    </h:link>
+                                </li>
+                                <li>
+                                    <h:link outcome="pretty:users">
+                                        <i class="fa fa-users fa-fw"/>
+                                        <span>Użytkownicy</span>
+                                    </h:link>
+                                </li>
+                                <li>
+                                    <h:link outcome="pretty:categories">
+                                        <i class="fa fa-folder-open-o fa-fw"/>
+                                        <span>Kategorie</span>
+                                    </h:link>
+                                </li>
+                                <li>
+                                    <h:link outcome="pretty:entries">
+                                        <i class="fa fa-edit fa-fw"/>
+                                        <span>Wpisy</span>
+                                    </h:link>
+                                </li>
+                            </ul>
+                            <div class="line-dev"/>
+                        </div>
+                    </div>
+                </nav>
+            </h:form>
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ui:insert name="content"/>
+                    </div>
+                </div>
+            </div>
+        <!--</div>-->
+    </h:body>
+
+</html>
