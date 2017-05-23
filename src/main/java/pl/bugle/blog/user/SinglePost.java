@@ -6,7 +6,6 @@ import pl.bugle.blog.dao.UsersDao;
 import pl.bugle.blog.entity.Entries;
 import pl.bugle.blog.entity.Ratings;
 import pl.bugle.blog.entity.Users;
-import java.util.Locale;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import org.apache.shiro.SecurityUtils;
@@ -89,16 +88,12 @@ public class SinglePost {
         Double format = rdao.getEntryRank(entry.getEntry_seotitle());
         if (format == null)
             format = 0.0;
-        return String.format(Locale.US, "%.2f", format);
+        return String.format("%.2f", format);
     }
-    
-    public int getVote() {
-        return rdao.countEntryRank(entry.getEntry_seotitle());
-    }
-    
+
     public String getText() {
-        int v = getVote();
-        return v > 0 ? "(<strong>" + v + "</strong> głosów, ocena: <strong>" + getRank() + "</strong>)" : "(brak oceny)";
+        int v = rdao.countEntryRank(entry.getEntry_seotitle());
+        return v > 0 ? String.format("<strong>%s<strong> głosów, ocena: <strong>%s<strong>", v, getRank()) : "(brak oceny)";
     }
     
     public void update() {
