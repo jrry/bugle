@@ -11,17 +11,16 @@ Java EE blog application
 - Apache Shiro 1.3.2
 - Bootstrap 3.3.7
 - Cropper 2.3.4
-- Commons BeanUtils 1.8.3
 - Commons Collections 3.2.2
 - Commons Logging 1.2
-- Hibernate ORM 5.1.4
-- Hibernate Search 5.6.0
-- HikariCP 2.6.0
+- Hibernate ORM 5.1.7
+- Hibernate Search 5.6.1
+- HikariCP 2.6.1
 - Java sitemap generator 2.2
 - Magnific Popup 1.1.0
-- OmniFaces 2.6
+- OmniFaces 2.6.1
 - PrettyFaces 3.4.1
-- PrimeFaces 6.0
+- PrimeFaces 6.1
 
 ## Build
 ```
