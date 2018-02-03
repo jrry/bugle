@@ -7,13 +7,14 @@ import pl.bugle.blog.entity.Entries;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import cz.jiripinkas.jsitemapgenerator.WebPageBuilder;
 import cz.jiripinkas.jsitemapgenerator.generator.SitemapGenerator;
 import org.omnifaces.util.Faces;
 
-@Named
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
+@ManagedBean
 @RequestScoped
 public class SitemapBuilder {
     

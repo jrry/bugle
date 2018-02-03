@@ -3,11 +3,12 @@ package pl.bugle.blog.admin;
 import pl.bugle.blog.dao.UsersDao;
 import pl.bugle.blog.entity.Users;
 import pl.bugle.blog.lazy.UserLazy;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import org.primefaces.model.LazyDataModel;
 
-@Named
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
+@ManagedBean
 @RequestScoped
 public class UserEdit {
     

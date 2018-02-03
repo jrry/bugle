@@ -4,11 +4,12 @@ import pl.bugle.blog.dao.EntriesDao;
 import pl.bugle.blog.entity.Entries;
 import pl.bugle.blog.lazy.EntryLazy;
 import pl.bugle.blog.util.UploadUtil;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import org.primefaces.model.LazyDataModel;
 
-@Named
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
+@ManagedBean
 @RequestScoped
 public class EntryEdit {
     

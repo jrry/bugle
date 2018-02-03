@@ -3,10 +3,10 @@ package pl.bugle.blog.user;
 import pl.bugle.blog.dao.UsersDao;
 import pl.bugle.blog.entity.Users;
 import java.io.IOException;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -17,7 +17,7 @@ import org.apache.shiro.web.util.WebUtils;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
-@Named
+@ManagedBean
 @RequestScoped
 public class Login {
     

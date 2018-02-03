@@ -3,11 +3,12 @@ package pl.bugle.blog.admin;
 import pl.bugle.blog.dao.CategoriesDao;
 import pl.bugle.blog.entity.Categories;
 import pl.bugle.blog.lazy.CategoryLazy;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import org.primefaces.model.LazyDataModel;
 
-@Named
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
+@ManagedBean
 @RequestScoped
 public class CategoryEdit {
 

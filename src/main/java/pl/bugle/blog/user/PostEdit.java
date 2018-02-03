@@ -12,8 +12,8 @@ import java.nio.file.FileAlreadyExistsException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -21,7 +21,7 @@ import org.apache.shiro.SecurityUtils;
 import org.omnifaces.util.Messages;
 import org.primefaces.model.UploadedFile;
 
-@Named
+@ManagedBean
 @RequestScoped
 public class PostEdit {
 

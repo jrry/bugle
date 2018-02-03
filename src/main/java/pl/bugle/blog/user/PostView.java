@@ -3,10 +3,10 @@ package pl.bugle.blog.user;
 import pl.bugle.blog.dao.EntriesDao;
 import pl.bugle.blog.entity.Entries;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
-@Named
+@ManagedBean
 @RequestScoped
 public class PostView {
 

@@ -2,12 +2,13 @@ package pl.bugle.blog.admin;
 
 import pl.bugle.blog.dao.OptionsDao;
 import pl.bugle.blog.entity.Options;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Named
+@ManagedBean
 @RequestScoped
 public class OptionsEdit {
 

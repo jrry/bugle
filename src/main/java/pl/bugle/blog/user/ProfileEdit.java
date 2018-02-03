@@ -1,9 +1,11 @@
 package pl.bugle.blog.user;
 
+import com.github.jrry.pvl.PVL_Email;
 import pl.bugle.blog.dao.UsersDao;
 import pl.bugle.blog.entity.Users;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -11,11 +13,12 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.omnifaces.util.Messages;
 
-@Named
+@ManagedBean
 @RequestScoped
 public class ProfileEdit {
-    
-    @Pattern(regexp = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", message = "Niepoprawny adres email")
+
+    @Size(min = 6, max = 100, message = "Niepoprawna długość")
+    @PVL_Email(message = "Niepoprawny adres email")
     private String email;
 
     @NotNull(message = "Podaj swoje hasło")
