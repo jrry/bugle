@@ -7,18 +7,18 @@ Java EE blog application
 - Wildfly 10 with MySQL Connector for Java
 
 ## Additional Libraries and Frameworks
-- Apache HttpComponents (Core 4.4.6, Client 4.5.3)
-- Apache Shiro 1.3.2
+- Apache HttpComponents (Core 4.4.9, Client 4.5.5)
+- Apache Shiro 1.4.0
 - Bootstrap 3.3.7
 - Cropper 2.3.4
 - Commons Collections 3.2.2
 - Commons Logging 1.2
-- Hibernate ORM 5.1.7
-- Hibernate Search 5.6.1
-- HikariCP 2.6.1
+- Hibernate ORM 5.1.12
+- Hibernate Search 5.6.4
+- HikariCP 2.7.2
 - Java sitemap generator 2.2
 - Magnific Popup 1.1.0
-- OmniFaces 2.6.1
+- OmniFaces 2.6.8
 - PrettyFaces 3.4.1
 - PrimeFaces 6.1
 
