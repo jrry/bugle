@@ -3,7 +3,6 @@ package pl.bugle.blog.user;
 import com.github.jrry.pvl.PVL_Email;
 import pl.bugle.blog.dao.UsersDao;
 import pl.bugle.blog.entity.Users;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.validation.constraints.NotNull;
