@@ -39,7 +39,9 @@
                                 </div>
                             </div>
                             <div class="form-bottom">
-                                <p:messages id="messages" globalOnly="true" showIcon="false" autoUpdate="true" closable="true" />
+                                <p:messages id="messages" globalOnly="true" showIcon="false" closable="true">
+                                    <p:autoUpdate/>
+                                </p:messages>
                                 <h:form id="form" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <p:inputText id="form-title" placeholder="Tytuł..." value="#{postEdit.title}">

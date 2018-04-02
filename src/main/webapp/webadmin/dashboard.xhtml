@@ -12,7 +12,9 @@
 
     <ui:define name="content">
         <h1 class="page-header">Panel</h1>
-        <p:messages id="messages" globalOnly="true" showIcon="false" autoUpdate="true" closable="true" />
+        <p:messages id="messages" globalOnly="true" showIcon="false" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
         <h:form id="form">
             <div class="form-group">
                 <p:inputText id="form-domain" placeholder="Domena..." value="#{optionsEdit.domain_name}">

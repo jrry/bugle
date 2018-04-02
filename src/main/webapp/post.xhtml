@@ -102,6 +102,20 @@
                                             </p:inplace>
                                         </ui:fragment>
                                         <div id="em" class="entry-comments">
+                                            <div id="disqus_thread"></div>
+                                            <script>
+                                                var disqus_config = function () {
+                                                    this.page.url = "http://bugle.pl/#{singlePost.entry.entry_seotitle}/";
+                                                    this.page.identifier = "#{singlePost.entry.entry_id}";
+                                                };
+                                                (function() {
+                                                    var d = document, s = d.createElement('script');
+                                                    s.src = 'https://buglepl.disqus.com/embed.js';
+                                                    s.setAttribute('data-timestamp', +new Date());
+                                                    (d.head || d.body).appendChild(s);
+                                                })();
+                                            </script>
+                                            <noscript>Aby zobaczyć komentarze, włącz obsługę JavaScript</noscript>
                                         </div>
                                     </div>
                                 </div>

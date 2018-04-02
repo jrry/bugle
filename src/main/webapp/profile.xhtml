@@ -34,7 +34,9 @@
                                 </div>
                             </div>
                             <div class="form-bottom">
-                                <p:messages id="messages" globalOnly="true" showIcon="false" autoUpdate="true" closable="true" />
+                                <p:messages id="messages" globalOnly="true" showIcon="false" closable="true">
+                                    <p:autoUpdate/>
+                                </p:messages>
                                 <h:form id="profile">
                                     <div class="form-group">
                                         <p:password id="active-password" placeholder="Obecne hasło..." value="#{profileEdit.activePassword}">

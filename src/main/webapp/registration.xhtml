@@ -40,7 +40,9 @@
                                 </div>
                             </div>
                             <div class="form-bottom">
-                                <p:messages id="messages" globalOnly="true" showIcon="false" autoUpdate="true" closable="true" />
+                                <p:messages id="messages" globalOnly="true" showIcon="false" closable="true">
+                                    <p:autoUpdate/>
+                                </p:messages>
                                 <h:form id="registration">
                                     <div class="form-group">
                                         <p:inputText id="username" placeholder="Nazwa użytkownika..." value="#{register.username}">
