@@ -41,15 +41,15 @@
     </url-mapping>
     <url-mapping id="page">
         <pattern value="/strona/#{page}/" />
-        <view-id value="/" />
+        <view-id value="/home.xhtml" />
     </url-mapping>
     <url-mapping id="category">
         <pattern value="/kategoria/#{ct}/" />
-        <view-id value="/" />
+        <view-id value="/home.xhtml" />
     </url-mapping>
     <url-mapping id="category-page">
         <pattern value="/kategoria/#{ct}/strona/#{page}/" />
-        <view-id value="/" />
+        <view-id value="/home.xhtml" />
     </url-mapping>
     <url-mapping id="single">
         <pattern value="/#{postId}/" />

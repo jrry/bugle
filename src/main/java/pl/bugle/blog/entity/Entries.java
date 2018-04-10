@@ -23,6 +23,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.DateBridge;
 import org.hibernate.search.annotations.Field;
@@ -85,6 +87,7 @@ public class Entries implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "entry_content")
     @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
     private String entry_content;

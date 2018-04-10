@@ -1,5 +1,7 @@
 package pl.bugle.blog.entity;
 
+import org.hibernate.annotations.Type;
+
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -39,6 +41,7 @@ public class Options implements Serializable {
     @NotNull
     @Lob
     @Column(name = "option_value")
+    @Type(type = "org.hibernate.type.TextType")
     private String option_value;
 
     public Options() {

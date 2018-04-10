@@ -45,11 +45,11 @@
     </context-param>
     <context-param>
         <param-name>sitemap.PATH</param-name>
-        <param-value>C:/bugle</param-value>
+        <param-value>/bugle/</param-value>
     </context-param>
     <context-param>
         <param-name>uploads.PATH</param-name>
-        <param-value>C:/bugle/uploads</param-value>
+        <param-value>/bugle/uploads/</param-value>
     </context-param>
     <context-param>
         <param-name>quality.JPEG</param-name>
