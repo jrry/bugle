@@ -15,7 +15,7 @@
     </faces-config-extension>
 
     <factory>
-        <exception-handler-factory>pl.bugle.blog.util.AjaxExceptionHandlerFactory</exception-handler-factory>
+        <exception-handler-factory>pl.bugle.blog.config.AjaxExceptionHandlerFactory</exception-handler-factory>
     </factory>
     
 </faces-config>

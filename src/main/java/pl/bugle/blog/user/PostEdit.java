@@ -6,7 +6,7 @@ import pl.bugle.blog.entity.Categories;
 import pl.bugle.blog.entity.Entries;
 import pl.bugle.blog.entity.Images;
 import pl.bugle.blog.entity.Users;
-import pl.bugle.blog.util.UploadUtil;
+import pl.bugle.blog.uploads.UploadUtil;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.Arrays;

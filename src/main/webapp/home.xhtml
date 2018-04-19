@@ -8,10 +8,10 @@
                 template="/WEB-INF/templates/main.xhtml">
 
     <ui:define name="seo">
-        <ui:fragment rendered="#{not empty postView.categoryParam}">
-            <title>#{categoryView.getCategory(postView.categoryParam).getCategory_name()} - #{optionsEdit.domain_name}</title>
+        <ui:fragment rendered="#{not empty allPostsView.categoryParam}">
+            <title>#{categoryView.getCategory(allPostsView.categoryParam).getCategory_name()} - #{optionsEdit.domain_name}</title>
         </ui:fragment>
-        <ui:fragment rendered="#{empty postView.categoryParam}">
+        <ui:fragment rendered="#{empty allPostsView.categoryParam}">
             <z:seometa title="#{optionsEdit.site_title} - #{optionsEdit.domain_name}" description="#{optionsEdit.site_desc}"/>
         </ui:fragment>
     </ui:define>
@@ -22,18 +22,18 @@
 
     <ui:define name="setting">
         <f:metadata>
-            <f:viewParam name="page" value="#{postView.page}"/>
-            <f:viewParam name="s" value="#{postView.searchQuery}"/>
-            <f:viewParam name="ct" value="#{postView.categoryParam}"/>
-            <f:viewAction action="#{postView.loadPage()}"/>
+            <f:viewParam name="page" value="#{allPostsView.page}"/>
+            <f:viewParam name="s" value="#{allPostsView.searchQuery}"/>
+            <f:viewParam name="ct" value="#{allPostsView.categoryParam}"/>
+            <f:viewAction action="#{allPostsView.loadPage()}"/>
         </f:metadata>
     </ui:define>
     
     <ui:define name="logo">
-        <ui:fragment rendered="#{not empty postView.categoryParam}">
+        <ui:fragment rendered="#{not empty allPostsView.categoryParam}">
             <h:link class="navbar-brand" outcome="pretty:home"/>
         </ui:fragment>
-        <ui:fragment rendered="#{empty postView.categoryParam}">
+        <ui:fragment rendered="#{empty allPostsView.categoryParam}">
             <h1 class="logo">Bugle<h:link class="navbar-brand" value="blog informatyczny" outcome="pretty:home"/></h1>
         </ui:fragment>
     </ui:define>
@@ -44,13 +44,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12 col-md-8">
-                            <ui:fragment rendered="#{not empty postView.categoryParam}">
-                                <h1 class="search">#{categoryView.getCategory(postView.categoryParam).getCategory_name()}</h1>
+                            <ui:fragment rendered="#{not empty allPostsView.categoryParam}">
+                                <h1 class="search">#{categoryView.getCategory(allPostsView.categoryParam).getCategory_name()}</h1>
                             </ui:fragment>
-                            <ui:fragment rendered="#{not empty postView.searchQuery}">
-                                <h1 class="search">Szukaj: <span>#{postView.searchQuery}</span></h1>
+                            <ui:fragment rendered="#{not empty allPostsView.searchQuery}">
+                                <h1 class="search">Szukaj: <span>#{allPostsView.searchQuery}</span></h1>
                             </ui:fragment>
-                            <ui:repeat value="#{postView.getEntries()}" var="entry">
+                            <ui:repeat value="#{allPostsView.getEntries()}" var="entry">
                                 <div class="post-preview">
                                     <div class="blog-item-wrap">
                                         <img src="/uploads/#{of:formatDate(entry.entry_date, 'YYYY/M')}/#{entry.entry_image.image_name}.jpg" alt="#{entry.entry_image.image_alt}"/>
@@ -75,7 +75,7 @@
                                                 </div>
                                             </div>
                                             <div class="entry-content">
-                                                <h:outputText value="#{postView.cutString(entry.entry_content)}" escape="false" />
+                                                <h:outputText value="#{allPostsView.cutString(entry.entry_content)}" escape="false" />
                                                 <p class="clearfix">
                                                     <h:outputLink class="btn btn-primary read-more" value="#{request.contextPath}/#{entry.entry_seotitle}/"> 
                                                         Czytaj dalej
@@ -89,17 +89,17 @@
                             </ui:repeat>
                             <nav class="navigation paging-navigation">
                                 <div class="nav-links">
-                                    <ui:fragment rendered="#{postView.nextpage}">
+                                    <ui:fragment rendered="#{allPostsView.nextpage}">
                                         <div class="nav-previous">
-                                            <h:outputLink class="btn btn-primary" value="#{request.contextPath}/#{postView.pathNext()}">
+                                            <h:outputLink class="btn btn-primary" value="#{request.contextPath}/#{allPostsView.pathNext()}">
                                                 <i class="fa fa-chevron-left" />
                                                 Starsze wpisy
                                             </h:outputLink>
                                         </div>
                                     </ui:fragment>
-                                    <ui:fragment rendered="#{postView.prevpage}">
+                                    <ui:fragment rendered="#{allPostsView.prevpage}">
                                         <div class="nav-next">
-                                            <h:outputLink class="btn btn-primary" value="#{request.contextPath}/#{postView.pathPrev()}">
+                                            <h:outputLink class="btn btn-primary" value="#{request.contextPath}/#{allPostsView.pathPrev()}">
                                                 Nowsze wpisy
                                                 <i class="fa fa-chevron-right" />
                                             </h:outputLink>
@@ -112,11 +112,11 @@
                             <div class="well">
                                 <h:form id="search-engine" styleClass="text-left">
                                     <div class="input-group">
-                                        <p:inputText id="keywords" placeholder="Szukaj..." maxlength="100" value="#{postView.searchQuery}" required="true" requiredMessage="Pole nie może być puste" validatorMessage="Niedozwolone znaki">
+                                        <p:inputText id="keywords" placeholder="Szukaj..." maxlength="100" value="#{allPostsView.searchQuery}" required="true" requiredMessage="Pole nie może być puste" validatorMessage="Niedozwolone znaki">
                                             <f:validateRegex pattern="[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]+[ a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]*"/>
                                         </p:inputText>
                                         <span class="input-group-btn">
-                                            <p:commandButton id="find" icon="fa fa-search" class="btn btn-primary" title="Wyszukiwarka Bugle" action="#{postView.search()}"/>
+                                            <p:commandButton id="find" icon="fa fa-search" class="btn btn-primary" title="Wyszukiwarka Bugle" action="#{allPostsView.search()}"/>
                                             <p:ajax update="msgSearch" event="keyup"/>
                                         </span>
                                     </div>

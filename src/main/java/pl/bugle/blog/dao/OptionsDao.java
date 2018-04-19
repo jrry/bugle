@@ -1,7 +1,7 @@
 package pl.bugle.blog.dao;
 
 import pl.bugle.blog.entity.Options;
-import pl.bugle.blog.util.HibernateUtil;
+import pl.bugle.blog.config.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

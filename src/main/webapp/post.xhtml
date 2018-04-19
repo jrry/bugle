@@ -9,7 +9,7 @@
                 template="/WEB-INF/templates/main.xhtml">
 
     <ui:define name="seo">
-        <z:seometa title="#{singlePost.entry.entry_title} - #{optionsEdit.domain_name}" description="#{singlePost.entry.entry_seodesc}"/>
+        <z:seometa title="#{singlePostView.entry.entry_title} - #{optionsEdit.domain_name}" description="#{singlePostView.entry.entry_seodesc}"/>
     </ui:define>
 
     <ui:define name="head_css">
@@ -17,17 +17,17 @@
     </ui:define>
 
     <ui:define name="head_js">
-        <script type="application/ld+json">{"@context":"http://schema.org","@type":"NewsArticle","mainEntityOfPage":{"@type":"WebPage","@id":"http://bugle.pl/#{singlePost.entry.entry_seotitle}/"},"headline":"#{singlePost.entry.entry_title}","image":{"@type":"ImageObject","url":"http://bugle.pl/uploads/#{of:formatDate(singlePost.entry.entry_date, 'YYYY/M')}/#{singlePost.entry.entry_image.image_name}.jpg","height":300,"width":750},"datePublished":"#{singlePost.entry.entry_date}","dateModified":"#{singlePost.entry.entry_date}","author":{"@type":"Person","name":"#{singlePost.entry.entry_author.user_name}"},"publisher":{"@type":"Organization","name":"Bugle","logo":{"@type":"ImageObject","url":"http://bugle.pl/javax.faces.resource/img/logo.png","width":123,"height":49}},"description":"#{singlePost.entry.entry_seodesc}"}</script>
+        <script type="application/ld+json">{"@context":"http://schema.org","@type":"NewsArticle","mainEntityOfPage":{"@type":"WebPage","@id":singlePost},"headline":singlePost,"image":{"@type":"ImageObject","url":singlePost,"height":300,"width":750},"datePublished":singlePost,"dateModified":singlePost,"author":{"@type":"Person","name":singlePost},"publisher":{"@type":"Organization","name":"Bugle","logo":{"@type":"ImageObject","url":"http://bugle.pl/javax.faces.resource/img/logo.png","width":123,"height":49}},"description":singlePost}</script>
         <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Bugle","alternateName":"Blog informatyczny","url":"http://bugle.pl"}</script>
-        <script type="application/ld+json">{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://bugle.pl/kategoria/#{singlePost.entry.entry_categories.get(0).getCategory_seoname()}/","name":"#{singlePost.entry.entry_categories.get(0).getCategory_name()}"}}]}</script>
+        <script type="application/ld+json">{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://bugle.pl/kategoria/#{singlePostView.entry.entry_categories.get(0).getCategory_seoname()}/","name":"#{singlePostView.entry.entry_categories.get(0).getCategory_name()}"}}]}</script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"/>
         <script>$(document).ready(function(){$('.image-link').magnificPopup({delegate:'a',type:'image',closeOnContentClick:true,closeBtnInside:false,image:{verticalFit:true},zoom:{enabled:true,duration:300}});$('.gallery').each(function(){$(this).magnificPopup({delegate:'a',type:'image',closeBtnInside:false,gallery:{enabled:true,preload:[0,1]},image:{verticalFit:true},zoom:{enabled:true,duration:300}});});});</script>
     </ui:define>
 
     <ui:define name="setting">
         <f:metadata>
-            <f:viewParam name="postId" value="#{singlePost.entry.entry_seotitle}"/>
-            <f:viewAction action="#{singlePost.loadPost()}"/>
+            <f:viewParam name="postId" value="#{singlePostView.entry.entry_seotitle}"/>
+            <f:viewAction action="#{singlePostView.loadPost()}"/>
         </f:metadata>
     </ui:define>
 
@@ -41,25 +41,25 @@
                         <div class="col-sm-12 col-md-8">
                             <div class="post-preview">
                                 <div class="blog-item-wrap">
-                                    <img src="/uploads/#{of:formatDate(singlePost.entry.entry_date, 'YYYY/M')}/#{singlePost.entry.entry_image.image_name}.jpg" alt="#{singlePost.entry.entry_image.image_alt}"/>
+                                    <img src="/uploads/#{of:formatDate(singlePostView.entry.entry_date, 'YYYY/M')}/#{singlePostView.entry.entry_image.image_name}.jpg" alt="#{singlePostView.entry.entry_image.image_alt}"/>
                                     <div class="post-inner-content">
                                         <div id="eh" class="entry-header">
-                                            <h1 class="entry-title">#{singlePost.entry.entry_title}</h1>
+                                            <h1 class="entry-title">#{singlePostView.entry.entry_title}</h1>
                                             <div class="entry-meta">
                                                 <span class="posted"> 
                                                     <i class="fa fa-calendar"/>
-                                                    <time class="entry-date" datetime="#{singlePost.entry.entry_date}"><h:outputText value="#{singlePost.entry.entry_date}"><f:convertDateTime type="both" dateStyle="long" timeStyle="short" /></h:outputText></time>
+                                                    <time class="entry-date" datetime="#{singlePostView.entry.entry_date}"><h:outputText value="#{singlePostView.entry.entry_date}"><f:convertDateTime type="both" dateStyle="long" timeStyle="short" /></h:outputText></time>
                                                 </span>
                                                 <span class="byline"> 
                                                     <i class="fa fa-user"/>
                                                     <span class="author">
-                                                        <h:outputText class="fn" value="#{singlePost.entry.entry_author.user_name}" />
+                                                        <h:outputText class="fn" value="#{singlePostView.entry.entry_author.user_name}" />
                                                     </span>
                                                 </span>
                                                 <span class="cat-links">
                                                     <i class="fa fa-folder-open-o"/>
                                                     <h:outputText value=" "/>
-                                                    <ui:repeat value="#{singlePost.entry.entry_categories}" var="cat" varStatus="catStatus">
+                                                    <ui:repeat value="#{singlePostView.entry.entry_categories}" var="cat" varStatus="catStatus">
                                                         <h:outputLink title="Wszystkie artykuły w kategorii #{cat.category_name}" value="#{request.contextPath}/kategoria/#{cat.category_seoname}/" rel="category tag">
                                                             <h:outputText value="#{cat.category_name}"/>
                                                             <h:outputText value=", " rendered="#{!catStatus.last}" />
@@ -69,19 +69,19 @@
                                             </div>
                                         </div>
                                         <div id="ec" class="entry-content">
-                                            <h:outputText value="#{singlePost.entry.entry_content}" escape="false" />
+                                            <h:outputText value="#{singlePostView.entry.entry_content}" escape="false" />
                                         </div>
                                         <div id="er" class="entry-rating">
                                             <span class="rating">
                                                 <h:form id="form">
                                                     <span class="stars">
-                                                        <p:rating id="rating" value="#{empty request.remoteUser ? fn:substring(singlePost.rank, 0, 1) : singlePost.rate}" 
+                                                        <p:rating id="rating" value="#{empty request.remoteUser ? fn:substring(singlePostView.rank, 0, 1) : singlePostView.rate}"
                                                                   readonly="#{empty request.remoteUser}">
-                                                            <p:ajax event="rate"  update="mark" listener="#{singlePost.onRate()}"/>
-                                                            <p:ajax event="cancel" update="mark" listener="#{singlePost.onCancel()}"/>
+                                                            <p:ajax event="rate"  update="mark" listener="#{singlePostView.onRate()}"/>
+                                                            <p:ajax event="cancel" update="mark" listener="#{singlePostView.onCancel()}"/>
                                                         </p:rating>
                                                     </span>
-                                                    <h:outputText id="mark" escape="false" value="#{singlePost.text}"/>
+                                                    <h:outputText id="mark" escape="false" value="#{singlePostView.text}"/>
                                                 </h:form>
                                             </span>
                                         </div>
@@ -93,9 +93,9 @@
                                                 <f:facet name="input">
                                                     <h:form id="edit">
                                                         <div class="form-group">
-                                                            <p:editor required="true" id="editor" value="#{singlePost.content}"/>
+                                                            <p:editor required="true" id="editor" value="#{singlePostView.content}"/>
                                                         </div>
-                                                        <p:commandButton value="Zapisz" ajax="false" class="btn btn-success" action="#{singlePost.update()}" />
+                                                        <p:commandButton value="Zapisz" ajax="false" class="btn btn-success" action="#{singlePostView.update()}" />
                                                         <p:commandButton value="Anuluj" class="btn btn-primary" oncomplete="PF('ipvar').hide();"/>
                                                     </h:form>
                                                 </f:facet>
@@ -105,8 +105,8 @@
                                             <div id="disqus_thread"></div>
                                             <script>
                                                 var disqus_config = function () {
-                                                    this.page.url = "http://bugle.pl/#{singlePost.entry.entry_seotitle}/";
-                                                    this.page.identifier = "#{singlePost.entry.entry_id}";
+                                                    this.page.url = "http://bugle.pl/#{singlePostView.entry.entry_seotitle}/";
+                                                    this.page.identifier = "#{singlePostView.entry.entry_id}";
                                                 };
                                                 (function() {
                                                     var d = document, s = d.createElement('script');
@@ -125,11 +125,11 @@
                             <div class="well">
                                 <h:form id="search-engine" styleClass="text-left">
                                     <div class="input-group">
-                                        <p:inputText id="keywords" placeholder="Szukaj..." maxlength="100" value="#{postView.searchQuery}" required="true" requiredMessage="Pole nie może być puste" validatorMessage="Niedozwolone znaki">
+                                        <p:inputText id="keywords" placeholder="Szukaj..." maxlength="100" value="#{allPostsView.searchQuery}" required="true" requiredMessage="Pole nie może być puste" validatorMessage="Niedozwolone znaki">
                                             <f:validateRegex pattern="[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]+[ a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]*"/>
                                         </p:inputText>
                                         <span class="input-group-btn">
-                                            <p:commandButton id="find" icon="fa fa-search" class="btn btn-primary" title="Wyszukiwarka Bugle" action="#{postView.search()}"/>
+                                            <p:commandButton id="find" icon="fa fa-search" class="btn btn-primary" title="Wyszukiwarka Bugle" action="#{allPostsView.search()}"/>
                                             <p:ajax update="msgSearch" event="keyup"/>
                                         </span>
                                     </div>

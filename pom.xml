@@ -226,22 +226,6 @@
                     </execution>
                 </executions>
             </plugin>
-<!--          
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <version>1.1.0.Final</version>
-                <executions>
-                    <execution>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
--->
-
         </plugins>
     </build>
 

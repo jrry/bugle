@@ -3,7 +3,7 @@ package pl.bugle.blog.admin;
 import pl.bugle.blog.dao.EntriesDao;
 import pl.bugle.blog.entity.Entries;
 import pl.bugle.blog.lazy.EntryLazy;
-import pl.bugle.blog.util.UploadUtil;
+import pl.bugle.blog.uploads.UploadUtil;
 import org.primefaces.model.LazyDataModel;
 
 import javax.faces.bean.ManagedBean;

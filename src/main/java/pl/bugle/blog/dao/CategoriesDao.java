@@ -1,7 +1,7 @@
 package pl.bugle.blog.dao;
 
 import pl.bugle.blog.entity.Categories;
-import pl.bugle.blog.util.HibernateUtil;
+import pl.bugle.blog.config.HibernateUtil;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;

@@ -3,7 +3,7 @@ package pl.bugle.blog.dao;
 import pl.bugle.blog.entity.Categories;
 import pl.bugle.blog.entity.Entries;
 import pl.bugle.blog.entity.Ratings;
-import pl.bugle.blog.util.HibernateUtil;
+import pl.bugle.blog.config.HibernateUtil;
 import java.util.List;
 import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;

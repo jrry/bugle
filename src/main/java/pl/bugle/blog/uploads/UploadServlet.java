@@ -1,4 +1,4 @@
-package pl.bugle.blog.util;
+package pl.bugle.blog.uploads;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
